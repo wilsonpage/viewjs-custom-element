@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>view-custom-element</title>
+</head>
+<body>
+  <script src="../bower_components/CustomElements/custom-elements.js"></script>
+  <script src="../bower_components/evt/index.js"></script>
+  <script src="../bower_components/viewjs/index.js"></script>
+  <script src="../index.js"></script>
+  <script>
+
+    // Install the plugin
+    view.install(window['viewjs-custom-element']);
+
+    var MyView = view.register({
+      name: 'my-view',
+      createdCallback: function() {
+        console.log('initialize');
+        this.render();
+      },
+      template: function() {
+        return 'I was just placed into the DOM as markup'
+      },
+      sayName: function() {
+        alert(this.name);
+      }
+    });
+  </script>
+  <my-view></my-view>
+</body>
+</html>

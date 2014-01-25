@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>view-custom-element</title>
+</head>
+<body>
+  <script src="../bower_components/CustomElements/custom-elements.js"></script>
+  <script src="../bower_components/evt/index.js"></script>
+  <script src="../bower_components/viewjs/index.js"></script>
+  <script src="../index.js"></script>
+  <script>
+
+    // Install the plugin
+    view.install(window['viewjs-custom-element']);
+
+    var MyView = view.register({
+      name: 'my-view',
+
+      initialize: function(options) {
+        console.log('initialize', options);
+        this.on('inserted', this.onInserted);
+        this.on('remove', this.onRemoved);
+      },
+
+      template: function() {
+        return 'I\'m a &lt;' + this.tagName + '&gt; element';
+      },
+
+      onInserted: function() {
+        console.log('inserted');
+      },
+
+      onRemoved: function() {
+        console.log('removed');
+      }
+    });
+
+    var myView = new MyView({ some: 'option' })
+      .render()
+      .appendTo(document.body);
+  </script>
+</body>
+</html>

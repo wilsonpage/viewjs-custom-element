@@ -1,0 +1,14 @@
+{
+  "name": "viewjs-custom-element",
+  "version": "0.0.0",
+  "description": "Allows defined views to be registered as custom elements.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wilson Page",
+  "license": "BSD-2-Clause"
+}

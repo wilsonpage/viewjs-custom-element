@@ -1,0 +1,20 @@
+{
+  "name": "view-custom-element",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "Wilson Page <wilsonpage@me.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "viewjs": "*",
+    "CustomElements": "https://github.com/Polymer/CustomElements.git#~0.1.1"
+  }
+}
