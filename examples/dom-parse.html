@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>view-custom-element</title>
+</head>
+<body>
+  <my-view id="view1" view-name="my-view">
+    <my-view id="view2" view-parent="view1" view-name="my-view"></my-view>
+  </my-view>
+
+  <script src="../bower_components/CustomElements/custom-elements.js"></script>
+  <script src="../bower_components/evt/index.js"></script>
+  <script src="../bower_components/viewjs/index.js"></script>
+  <script src="../bower_components/viewjs-assemble/index.js"></script>
+  <script src="../bower_components/viewjs-parse/index.js"></script>
+  <script src="../index.js"></script>
+  <script>
+
+    // Install the plugin
+    viewjs.install(window['viewjs-parse']);
+    viewjs.install(window['viewjs-custom-element']);
+
+    var MyView = viewjs.register({
+      name: 'my-view',
+
+      initialize: function(options) {
+        //console.log('initialize', options);
+      },
+
+      template: function() {
+        return 'I\'m a &lt;' + this.tagName + '&gt; element';
+      }
+    });
+
+
+    var parsed = viewjs.parse(document.getElementById('view1'));
+
+    debugger;
+
+
+  </script>
+</body>
+</html>

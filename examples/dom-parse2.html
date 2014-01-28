@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>view-custom-element</title>
+</head>
+<body>
+  <my-view id="view1" name="my-view" nested="view2 view3">
+    <x-foo id="view2" name="x-foo"></x-foo>
+    <x-foo id="view3" name="x-foo"></x-foo>
+  </my-view>
+
+  <script src="../bower_components/CustomElements/custom-elements.js"></script>
+  <script src="../bower_components/evt/index.js"></script>
+  <script src="../bower_components/viewjs/index.js"></script>
+  <script src="../bower_components/viewjs-nested/index.js"></script>
+  <script src="../index.js"></script>
+  <script>
+
+    // Install the plugin
+    viewjs.install(window['viewjs-custom-element']);
+    viewjs.install(window['viewjs-nested']);
+
+    var MyView = viewjs.register({
+      name: 'my-view',
+      initialize: function() {
+        this.render();
+      },
+      render: function() {
+        var nestedHTML = this.nested.map(function(child) { return child.render().placeholder(); }).join('');
+        this.innerHTML = "name: " + this.name + "<br/>" + nestedHTML;
+      },
+    });
+
+    var XFoo = viewjs.register({
+      extends: MyView,
+      name: 'x-foo'
+    });
+
+    var root = document.getElementById('view1')
+    var view = viewjs(root);
+  </script>
+</body>
+</html>
