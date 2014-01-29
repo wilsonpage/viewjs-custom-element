@@ -15,6 +15,10 @@
   ],
   "devDependencies": {
     "viewjs": "*",
-    "CustomElements": "https://github.com/Polymer/CustomElements.git#~0.1.1"
+    "CustomElements": "https://github.com/Polymer/CustomElements.git"
+  },
+  "resolutions": {
+    "WeakMap": "0.1.4",
+    "tools": "0.1.4"
   }
 }
