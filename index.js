@@ -7,7 +7,7 @@ define(function(require, exports, module) {
  */
 
 var has = Object.prototype.hasOwnProperty;
-var registerElement = document.registerElement || document.register;
+var usingNative = !window.CustomElements || window.CustomElements.useNative;
 
 /**
  * Exports
@@ -101,6 +101,8 @@ exports.install = function(viewjs) {
       options = options || {};
       options.el = this;
 
+      console.log('created: %s', this.name);
+
       // We delay initialization if the DOM
       // triggered the callback, as we can't
       // be sure if any nested views will have
@@ -109,12 +111,13 @@ exports.install = function(viewjs) {
       else initialize();
 
       function initialize() {
+        console.log('initializing: %s', self.name);
         self.className = self.name;
         View.call(self, options);
       }
     };
 
-    Element = registerElement.call(document, proto.name, { prototype: proto });
+    Element = document.registerElement(proto.name, { prototype: proto });
 
     /**
      * A faux constructor to wrap
@@ -162,10 +165,14 @@ function extendProto(proto, head) {
 // TODO: Tidy this crap
 var q = [], timer;
 function queue(fn, name) {
+  // Reverse the order of the flush if using native
+  // beause of: github.com/Polymer/CustomElements/issues/94
+  var remove = usingNative ? 'pop' : 'shift';
+
   q.push(fn);
   timer = timer || setTimeout(flush);
   function flush() {
-    while (q.length) q.pop().call();
+    while (q.length) q[remove]().call();
     timer = null;
   }
 }
